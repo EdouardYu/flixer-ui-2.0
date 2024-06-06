@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieRow from "@/components/movie-row/MovieRow";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
-import MovieService, { Movie, Category } from "@/services/MovieServices";
+import MovieService, { Movie, Category } from "@/services/MovieService";
 import Loader from "@/components/loader/Loader";
 
 const Homepage: React.FC = () => {
