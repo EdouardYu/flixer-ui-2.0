@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import UserService from "@/services/UserService";
-import MovieService from "@/services/MovieServices";
+import MovieService from "@/services/MovieService";
 
 interface GuardProps {
   children: ReactNode;

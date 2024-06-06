@@ -1,9 +1,10 @@
 import { useState, useEffect, FunctionComponent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import MovieService from "@/services/MovieServices";
+import MovieService from "@/services/MovieService";
 import UserService from "@/services/UserService";
 import Loader from "@/components/loader/Loader";
 import "@/pages/purchase/Purchase.css";
+import axios from "axios";
 
 interface PurchaseData {
   user_id: string | undefined;
@@ -57,7 +58,13 @@ const Purchase: FunctionComponent = () => {
 
         setIsLoading(false);
       } catch (error) {
-        setGlobalError("Failed to fetch movie details.");
+        if (
+          axios.isAxiosError(error) &&
+          error.response &&
+          error.response.status !== 500
+        )
+          setGlobalError(error.response.data.message);
+        else setGlobalError("Failed to fetch movie details.");
         setIsLoading(false);
       }
     };
@@ -70,7 +77,13 @@ const Purchase: FunctionComponent = () => {
       await UserService.subscribeUser(purchase?.user_id);
       navigate(`/movie-trailer/${id}`);
     } catch (error) {
-      setSubscriptionError("Failed to subscribe, please try again later");
+      if (
+        axios.isAxiosError(error) &&
+        error.response &&
+        error.response.status !== 500
+      )
+        setSubscriptionError(error.response.data.message);
+      else setSubscriptionError("Failed to subscribe, please try again later");
     }
   };
 
@@ -79,7 +92,13 @@ const Purchase: FunctionComponent = () => {
       await MovieService.purchaseMovie(purchase);
       navigate(`/movie-trailer/${id}`);
     } catch (error) {
-      setPurchaseError("Failed to purchase movie, please try again later");
+      if (
+        axios.isAxiosError(error) &&
+        error.response &&
+        error.response.status !== 500
+      )
+        setPurchaseError(error.response.data.message);
+      else setPurchaseError("Failed to purchase movie, please try again later");
     }
   };
 
