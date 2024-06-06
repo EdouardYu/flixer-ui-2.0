@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieRow from "@/components/movie-row/MovieRow";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
-import MovieService, { Movie, Category } from "@/services/MovieServices";
+import MovieService, { Movie, Category } from "@/services/MovieService";
 import Loader from "@/components/loader/Loader";
 
 const Homepage: React.FC = () => {
@@ -15,8 +15,12 @@ const Homepage: React.FC = () => {
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const allMovies = await MovieService.fetchMovies(0);
-        setCategories(MovieService.categorizeMovies(allMovies));
+        const allMovies = await MovieService.fetchMovies(2);
+        setCategories([
+          { title: 'All Movies', movies: allMovies.slice(0,20) },
+          { title: 'Discover', movies: allMovies.slice(21, 35) }, 
+          { title: 'Monthly Rank', movies: allMovies.slice(36, 50) } 
+      ]);
         setIsLoading(false);
       } catch (err) {
         console.error("Failed to fetch movies:", err);

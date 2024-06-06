@@ -1,6 +1,6 @@
 import { useState, useEffect, FunctionComponent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import MovieService from "@/services/MovieServices";
+import MovieService from "@/services/MovieService";
 import UserService from "@/services/UserService";
 import Loader from "@/components/loader/Loader";
 import "@/pages/purchase/Purchase.css";
