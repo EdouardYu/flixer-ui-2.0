@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+/* Base styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    background-color: #242222; /* Couleur de fond */
+    color: white; /* Couleur de texte par défaut */
+    scroll-behavior: smooth;
+    font-family: 'Lexend Deca', sans-serif;
+    overflow-x: hidden; /* Empêcher le défilement horizontal */
+}
+
+.charte-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    max-width: 200px;
+}
+
+.logo-line {
+    border-bottom: 2px solid #ffffff;
+    margin: 1em auto;
+    width: 80%;
+}
+
+.charte-nav {
+    width: 100%;
+    text-align: center;
+    padding: 1em 0;
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.charte-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.charte-nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+.charte-nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    background-color: transparent;
+    border-radius: 0.25em;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.charte-nav ul li a:hover {
+    color: #61D6EA; /* Couleur du texte au hover */
+    background-color: transparent;
+}
+
+.charte-main {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 20px 50px;
+    background-color: #393939; /* Couleur de fond du contenu principal */
+    border-radius: 0.5em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    scroll-padding-top: 80px; /* Compense l'en-tête fixe */
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.charte-main h1 {
+    color: #0CC0DF; /* Couleur du titre principal */
+    text-align: center;
+    padding-bottom: 1em;
+    font-family: 'Lilita One', sans-serif;
+}
+
+.charte-main h2 {
+    color: #0CC0DF; /* Couleur des titres de section */
+    border-bottom: 2px solid #0CC0DF;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.charte-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.charte-list li {
+    margin-bottom: 2em;
+}
+
+.inner-list {
+    list-style: none;
+    margin-left: 2em;
+    padding-left: 0;
+}
+
+.inner-list li {
+    margin-bottom: 0.5em;
+}
+
+address {
+    font-style: normal;
+}
+
+.charte-footer {
+    text-align: center;
+    padding: 20px 50px;
+    background-color: #0CC0DF; /* Couleur du footer */
+    color: #ffffff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+.charte-footer p {
+    margin: 0;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-section h3 {
+    color: #0CC0DF;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    display: block;
+}
+
+img {
+    height: 40px;
+}

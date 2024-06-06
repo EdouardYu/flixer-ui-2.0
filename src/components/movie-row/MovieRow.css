@@ -1,0 +1,55 @@
+.movie-row {
+    position: relative;
+    margin: 20px 0;
+ 
+}
+
+.movie-row h2 {
+    color: white;
+    padding-left: 30px;
+    font-size: 30px;
+ 
+}
+
+.row-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.movie-card {
+    flex: 0 0 200px; /* This ensures the card has a fixed basis and doesn't grow or shrink */
+    height: 300px;
+    margin: 10px;
+    position: relative;
+    background-color: #333;
+    overflow: hidden;
+}
+
+.movie-card img {
+    width: 100%;  /* Ensures the image takes the full width of the card */
+    height: 100%; /* Ensures the image takes the full height of the card */
+    object-fit: cover; /* Ensures the image covers the card area without distorting the aspect ratio */
+}
+
+
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    z-index: 10;
+}
+
+.scroll-button.left {
+    left: 0;
+}
+
+.scroll-button.right {
+    right: 0;
+}

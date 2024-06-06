@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px ;
+    position: relative;
+    z-index: 999;
+    top: 0;
+    border-bottom: 4px solid #0CC0DF;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.search-bar input {
+    padding: 8px;
+    margin-right: 20px;
+    width: 200px;
+}
+
+.tag-dropdown {
+    position: relative;
+    margin-right: 20px;
+}
+
+.tag-dropdown button {
+    background-color: #0CC0DF;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tag-dropdown .dropdown-menu {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    right: 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: solid 2px #0CC0DF;
+    border-radius: 10px;
+    position: absolute;
+    top: 40px;
+}
+
+.tag-dropdown .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tag-dropdown .dropdown-menu ul li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.tag-dropdown .dropdown-menu ul li:hover {
+    background-color: #555;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #0CC0DF;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.buttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.buttons img {
+    height: 30px;
+}
+
+.dropdown-menu {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    right: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: solid 2px #0CC0DF;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.dropdown-menu ul li a {
+    color: white; 
+    text-decoration: none;
+}

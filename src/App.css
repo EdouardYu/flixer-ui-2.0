@@ -1,0 +1,13 @@
+#root {
+  margin: 0 auto;
+  font-family: "Lilita One", cursive;
+}
+
+body {
+  background-color: #242222;
+  color: #fff;
+}
+
+input {
+  font-family: "Lilita One", cursive;
+}
