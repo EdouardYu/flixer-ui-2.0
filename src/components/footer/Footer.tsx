@@ -12,16 +12,16 @@ const Footer: React.FC = () => {
         <div className="footer">
             <div className="footer-section">
                 <img src={silhouetteImage} alt="Icon" className="footer-icon" />
-                <h3>Vous et nous</h3>
+                <h3>You and us</h3>
                 <ul>
-                    <li><a href="#">Contactez-nous</a></li>
+                    <li><a href="#">Contact us</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Qui sommes-nous ?</a></li>
+                    <li><a href="#">Who are we ?</a></li>
                 </ul>
             </div>
             <div className="footer-section">
                 <img src={tropheeImage} alt="Icon" className="footer-icon" />
-                <h3>Succès du moment</h3>
+                <h3>Current hits</h3>
                 <ul>
                     <li><a href="#">Film n°1</a></li>
                     <li><a href="#">Film n°2</a></li>
@@ -33,18 +33,18 @@ const Footer: React.FC = () => {
                 <img src={bousoleImage} alt="Icon" className="footer-icon" />
                 <h3>Navigation</h3>
                 <ul>
-                    <li><a href="#">Mon profil</a></li>
-                    <li><a href="#">Nos offres</a></li>
+                    <li><a href="#">My profile</a></li>
+                    <li><a href="#">Our offers</a></li>
                     <li><a href="#">Catalogue</a></li>
                 </ul>
             </div>
             <div className="footer-section">
                 <img src={balancedImage} alt="Icon" className="footer-icon" />
-                <h3>Légal</h3>
+                <h3>Legal</h3>
                 <ul>
-                    <li><a href="#">Condition générale de vente</a></li>
-                    <li><a href="/charteDonnées">Charte pour la protection des données personnelles</a></li>
-                    <li><a href="#">Mention légale</a></li>
+                    <li><a href="#">Terms and sales</a></li>
+                    <li><a href="/charteDonnées">Data privacy and protection</a></li>
+                    <li><a href="#">Legal mentions</a></li>
                 </ul>
             </div>
         </div>

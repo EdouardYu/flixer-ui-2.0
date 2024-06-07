@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "@/pages/supplier/Supplier.css";
+import SupplierService from "@/services/SupplierService";
 
 const tags = [
   "THRILLER",
@@ -23,6 +24,34 @@ const tags = [
   "MUSIC",
 ];
 
+interface User {
+  exp: number;
+  id: string;
+  role: string;
+  username: string;
+}
+
+const getUserDetails = (): User | null => {
+  const token = localStorage.getItem("authToken");
+
+  if (!token) {
+    console.log("No token found in local storage.");
+    return null;
+  }
+
+  console.log("Token found:", token);
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    console.log("Parsed user details:", payload);
+    return payload;
+  } catch (e) {
+    console.error("Failed to parse token:", e);
+    localStorage.removeItem("authToken");
+    return null;
+  }
+};
+
 const SupplierPage: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -32,19 +61,42 @@ const SupplierPage: React.FC = () => {
   const [director, setDirector] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [supplierId, setSupplierId] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  useEffect(() => {
+    const userDetails = getUserDetails();
+    if (userDetails) {
+      setSupplierId(userDetails.id);
+    }
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!supplierId) {
+      console.error("Supplier ID not found");
+      return;
+    }
+
     const newMovie = {
       title,
+      url: postUrl,
       description,
-      postUrl,
-      releaseDate,
-      price,
+      supplierId: parseInt(supplierId, 10), // Convert string to number if necessary
+      poster_url: postUrl,
+      price: parseFloat(price),
+      released_at: releaseDate,
       director,
-      tags: selectedTags,
+      labelTag: selectedTags,
     };
-    console.log(newMovie);
+    
+    try {
+      const response = await SupplierService.addNewMovie(newMovie);
+      console.log("Movie added successfully:", response);
+      // Handle successful addition (e.g., show a success message or redirect)
+    } catch (error) {
+      console.error("Failed to add movie:", error);
+      // Handle error (e.g., show an error message)
+    }
   };
 
   const handleTagChange = (tag: string) => {
@@ -64,9 +116,9 @@ const SupplierPage: React.FC = () => {
   return (
     <div className="supplier-page">
       <div className="supplier-container">
-        <h2>Ajouter un Nouveau Film</h2>
+        <h2>Add a movie</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Titre:</label>
+          <label htmlFor="title">Title:</label>
           <input
             id="title"
             type="text"
@@ -89,7 +141,7 @@ const SupplierPage: React.FC = () => {
             onChange={(e) => setPostUrl(e.target.value)}
             required
           />
-          <label htmlFor="releaseDate">Sorti le:</label>
+          <label htmlFor="releaseDate">Released in:</label>
           <input
             id="releaseDate"
             type="date"
@@ -97,7 +149,7 @@ const SupplierPage: React.FC = () => {
             onChange={(e) => setReleaseDate(e.target.value)}
             required
           />
-          <label htmlFor="price">Prix:</label>
+          <label htmlFor="price">Price:</label>
           <input
             id="price"
             type="number"
@@ -106,7 +158,7 @@ const SupplierPage: React.FC = () => {
             onChange={(e) => setPrice(e.target.value)}
             required
           />
-          <label htmlFor="director">Directeur:</label>
+          <label htmlFor="director">Director:</label>
           <input
             id="director"
             type="text"
