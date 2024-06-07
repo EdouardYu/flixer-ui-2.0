@@ -64,6 +64,7 @@ const SupplierPage: React.FC = () => {
   const [supplierId, setSupplierId] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [isError, setIsError] = useState<boolean>(false);
+  const [url, setUrl] = useState<string>(""); 
 
   useEffect(() => {
     const userDetails = getUserDetails();
@@ -83,9 +84,9 @@ const SupplierPage: React.FC = () => {
 
     const newMovie = {
       title,
-      url: postUrl,
+      url, 
       description,
-      supplierId: parseInt(supplierId, 10), // Convert string to number if necessary
+      supplierId: parseInt(supplierId, 10), 
       poster_url: postUrl,
       price: parseFloat(price),
       released_at: releaseDate,
@@ -98,7 +99,6 @@ const SupplierPage: React.FC = () => {
       console.log("Movie added successfully:", response);
       setMessage("Movie added successfully");
       setIsError(false);
-      // Clear form fields
       setTitle("");
       setDescription("");
       setPostUrl("");
@@ -106,6 +106,7 @@ const SupplierPage: React.FC = () => {
       setPrice("");
       setDirector("");
       setSelectedTags([]);
+      setUrl("");
     } catch (error) {
       console.error("Failed to add movie:", error);
       setMessage("Failed to add movie");
@@ -150,6 +151,14 @@ const SupplierPage: React.FC = () => {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <label htmlFor="url">URL:</label>
+          <input
+            id="url"
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
             required
           />
           <label htmlFor="postUrl">Post URL:</label>
