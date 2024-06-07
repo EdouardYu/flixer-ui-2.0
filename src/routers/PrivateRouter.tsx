@@ -7,8 +7,10 @@ import {
   Purchase,
   MovieTrailer,
   PageNotFound,
+  SupplierPage,
 } from "@/pages";
 import { MovieGuard, InverseMovieGuard } from "@/guards/MovieGuard";
+import { SupplierGuard } from "@/guards/SupplierGuard";
 import SearchResults from "@/pages/search-by-name/SearchResults";
 import TagsResults from "@/pages/search-by-tags/TagsResults";
 
@@ -37,6 +39,16 @@ const PrivateRouter: FunctionComponent = () => {
         />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/tags" element={<TagsResults />} />
+
+        <Route
+          path="/supplier"
+          element={
+            <SupplierGuard>
+              <SupplierPage />
+            </SupplierGuard>
+          }
+        />
+
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

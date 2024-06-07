@@ -9,3 +9,4 @@ export { default as Purchase } from "@/pages/purchase/Purchase";
 export { default as PageNotFound } from "@/pages/page-not-found/PageNotFound";
 export { default as Footer } from "@/components/footer/Footer";
 export { default as MovieTrailer } from "@/pages/movie-trailer/MovieTrailer";
+export { default as SupplierPage } from "@/pages/supplier/Supplier";

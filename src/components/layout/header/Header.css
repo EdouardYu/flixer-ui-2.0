@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px ;
+    padding: 10px 20px;
     position: relative;
     z-index: 999;
     top: 0;
@@ -26,7 +26,7 @@
     margin-right: 20px;
 }
 
-.tag-dropdown button {
+.tag-dropdown button{
     background-color: #0CC0DF;
     border: none;
     padding: 8px;
@@ -34,6 +34,13 @@
     font-weight: bold;
     cursor: pointer;
     border-radius: 4px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
 }
 
 .tag-dropdown .dropdown-menu {
@@ -47,6 +54,9 @@
     border-radius: 10px;
     position: absolute;
     top: 40px;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .tag-dropdown .dropdown-menu ul {
@@ -57,10 +67,28 @@
 .tag-dropdown .dropdown-menu ul li {
     padding: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .tag-dropdown .dropdown-menu ul li:hover {
     background-color: #555;
+}
+
+.tag-dropdown .dropdown-menu ul li input {
+    margin-right: 10px;
+}
+
+.tag-dropdown .dropdown-menu button {
+    width: 100%;
+    background-color: #0CC0DF;
+    border: none;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
 }
 
 nav ul {
@@ -78,6 +106,12 @@ nav ul li a {
     font-size: 25px;
 }
 
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .buttons button {
     background: none;
     border: none;
@@ -88,7 +122,7 @@ nav ul li a {
     height: 30px;
 }
 
-.dropdown-menu {
+.account-dropdown {
     background-color: #444;
     color: white;
     padding: 10px;
@@ -98,15 +132,33 @@ nav ul li a {
     border: solid 2px #0CC0DF;
     border-radius: 10px;
     position: absolute;
+    top: 40px;
+    right: 0;
 }
 
-.dropdown-menu ul {
+.account-dropdown ul {
     list-style: none;
     padding: 0;
 }
 
+.account-dropdown ul li {
+    padding: 8px;
+}
 
-.dropdown-menu ul li a {
-    color: white; 
+.account-dropdown ul li a {
+    color: white;
     text-decoration: none;
+}
+
+.supplier-button {
+    background-color: #0CC0DF !important;
+    border-radius: 5px;
+    border: none;
+    margin-right: 50px;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-weight: bold;
+
 }

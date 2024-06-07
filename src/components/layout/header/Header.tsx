@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import logoImage from "@/assets/flixer_logo.jpg";
 import userImage from "@/assets/user.png";
 import AuthService from "@/services/AuthService";
-// import notificationImage from "@/assets/notification.jpg";
-// import searchImage from "@/assets/search.png";
 
 const tags = [
   "THRILLER",
@@ -29,12 +27,34 @@ const tags = [
   "MUSIC",
 ];
 
+const getUserDetails = () => {
+  const token = localStorage.getItem("authToken");
+  if (!token) {
+    return null;
+  }
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload;
+  } catch (e) {
+    localStorage.removeItem("authToken");
+    return null;
+  }
+};
+
 const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showTagDropdown, setShowTagDropdown] = useState<boolean>(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = getUserDetails();
+    if (user) {
+      setUserRole(user.role);
+    }
+  }, []);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
@@ -92,7 +112,9 @@ const Header: React.FC = () => {
       </form>
       <div className="tag-dropdown">
         <button onClick={() => setShowTagDropdown(!showTagDropdown)}>
-          {selectedTags.length > 0 ? selectedTags.join(", ") : "Tags"}
+          {selectedTags.length > 0
+            ? `${selectedTags[0]}${selectedTags.length > 1 ? ` +${selectedTags.length - 1}` : ""}`
+            : "FIND MOVIES BY GENRES"}
         </button>
         {showTagDropdown && (
           <div className="dropdown-menu">
@@ -137,6 +159,14 @@ const Header: React.FC = () => {
         </ul>
       </nav>
       <div className="buttons">
+        {userRole === "SUPPLIER" && (
+          <button
+            className="supplier-button"
+            onClick={() => navigate("/supplier")}
+          >
+            ADD A MOVIE
+          </button>
+        )}
         <button
           className="account-button"
           onClick={() => setShowDropdown(!showDropdown)}
@@ -144,7 +174,7 @@ const Header: React.FC = () => {
           <img src={userImage} alt="Account" />
         </button>
         {showDropdown && (
-          <div className="dropdown-menu">
+          <div className="account-dropdown">
             <ul>
               <li>
                 <Link to="/profile">Your user profile</Link>
