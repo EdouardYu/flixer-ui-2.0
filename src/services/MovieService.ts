@@ -16,6 +16,20 @@ export interface Category {
   movies: Movie[];
 }
 
+
+interface AddMovieData {
+  title: string;
+  url: string;
+  description: string;
+  supplierId: number;
+  poster_url: string;
+  price: number;
+  released_at: string;
+  director: string;
+  labelTag: string[];
+}
+
+
 const MovieService = {
   purchaseMovie: async (purchaseData: PurchaseData | undefined) => {
     await axiosInstance.post(`/movies/purchase`, purchaseData);
@@ -77,6 +91,11 @@ const MovieService = {
       title: movie.title,
       poster_url: movie.poster_url,
     }));
+  },
+
+  addNewMovie: async (addMovieData: AddMovieData) => {
+    const response = await axiosInstance.post(`/movies`, addMovieData);
+    return response.data;
   },
 };
 

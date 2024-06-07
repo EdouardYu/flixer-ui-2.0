@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "@/pages/supplier/Supplier.css";
-import SupplierService from "@/services/SupplierService";
+import MovieService from "@/services/MovieService";
 
 const tags = [
   "THRILLER",
@@ -95,7 +95,7 @@ const SupplierPage: React.FC = () => {
     };
     
     try {
-      const response = await SupplierService.addNewMovie(newMovie);
+      const response = await MovieService.addNewMovie(newMovie);
       console.log("Movie added successfully:", response);
       setMessage("Movie added successfully");
       setIsError(false);
