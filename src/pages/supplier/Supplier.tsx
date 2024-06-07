@@ -62,6 +62,8 @@ const SupplierPage: React.FC = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [supplierId, setSupplierId] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     const userDetails = getUserDetails();
@@ -74,6 +76,8 @@ const SupplierPage: React.FC = () => {
     event.preventDefault();
     if (!supplierId) {
       console.error("Supplier ID not found");
+      setMessage("Supplier ID not found");
+      setIsError(true);
       return;
     }
 
@@ -92,10 +96,20 @@ const SupplierPage: React.FC = () => {
     try {
       const response = await SupplierService.addNewMovie(newMovie);
       console.log("Movie added successfully:", response);
-      // Handle successful addition (e.g., show a success message or redirect)
+      setMessage("Movie added successfully");
+      setIsError(false);
+      // Clear form fields
+      setTitle("");
+      setDescription("");
+      setPostUrl("");
+      setReleaseDate("");
+      setPrice("");
+      setDirector("");
+      setSelectedTags([]);
     } catch (error) {
       console.error("Failed to add movie:", error);
-      // Handle error (e.g., show an error message)
+      setMessage("Failed to add movie");
+      setIsError(true);
     }
   };
 
@@ -117,6 +131,11 @@ const SupplierPage: React.FC = () => {
     <div className="supplier-page">
       <div className="supplier-container">
         <h2>Add a movie</h2>
+        {message && (
+          <div className={`message ${isError ? 'error' : 'success'}`}>
+            {message}
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <label htmlFor="title">Title:</label>
           <input
