@@ -8,11 +8,13 @@ import {
   MovieTrailer,
   PageNotFound,
   SupplierPage,
+  MovieHistory
 } from "@/pages";
 import { MovieGuard, InverseMovieGuard } from "@/guards/MovieGuard";
 import { SupplierGuard } from "@/guards/SupplierGuard";
 import SearchResults from "@/pages/search-by-name/SearchResults";
 import TagsResults from "@/pages/search-by-tags/TagsResults";
+
 
 const PrivateRouter: FunctionComponent = () => {
   return (
@@ -21,6 +23,7 @@ const PrivateRouter: FunctionComponent = () => {
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/movie-history" element={<MovieHistory />} /> 
         <Route
           path="/purchase/:id"
           element={
@@ -39,7 +42,6 @@ const PrivateRouter: FunctionComponent = () => {
         />
         <Route path="/search" element={<SearchResults />} />
         <Route path="/tags" element={<TagsResults />} />
-
         <Route
           path="/supplier"
           element={
@@ -48,7 +50,6 @@ const PrivateRouter: FunctionComponent = () => {
             </SupplierGuard>
           }
         />
-
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

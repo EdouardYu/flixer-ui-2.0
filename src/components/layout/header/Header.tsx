@@ -180,7 +180,7 @@ const Header: React.FC = () => {
                 <Link to="/profile">Your user profile</Link>
               </li>
               <li>
-                <Link to="/movies">Your Movies</Link>
+                <Link to="/movie-history">Your Movies</Link>
               </li>
               <li>
                 <Link to="/authentication/login" onClick={handleLogout}>

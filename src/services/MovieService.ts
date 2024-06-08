@@ -1,8 +1,10 @@
 import axiosInstance from "@/services/axiosConfig";
+import axios from "axios";
+
 
 interface PurchaseData {
-  user_id: string | undefined;
-  movie_id: string | undefined;
+  user_id: string;
+  movie_id: string;
 }
 
 export interface Movie {
@@ -16,7 +18,6 @@ export interface Category {
   movies: Movie[];
 }
 
-
 interface AddMovieData {
   title: string;
   url: string;
@@ -29,13 +30,16 @@ interface AddMovieData {
   labelTag: string[];
 }
 
-
+interface HistoryData {
+  user_id: number;
+  movie_id: number;
+}
 const MovieService = {
-  purchaseMovie: async (purchaseData: PurchaseData | undefined) => {
+  purchaseMovie: async (purchaseData: PurchaseData) => {
     await axiosInstance.post(`/movies/purchase`, purchaseData);
   },
 
-  checkPurchased: async (purchaseData: PurchaseData | undefined) => {
+  checkPurchased: async (purchaseData: PurchaseData) => {
     const response = await axiosInstance.post(
       `/movies/purchased`,
       purchaseData
@@ -43,7 +47,7 @@ const MovieService = {
     return response.data;
   },
 
-  getMovieDetails: async (movie_id: string | undefined) => {
+  getMovieDetails: async (movie_id: string) => {
     const response = await axiosInstance.get(`/movies/${movie_id}`);
     return response.data;
   },
@@ -97,6 +101,32 @@ const MovieService = {
     const response = await axiosInstance.post(`/movies`, addMovieData);
     return response.data;
   },
+
+  addToHistory: async (historyData: HistoryData) => {
+    try {
+      const response = await axiosInstance.post(`/history`, historyData);
+      return response.data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error:', error.response ? error.response.data : error.message);
+      } else if (error instanceof Error) {
+        console.error('General error:', error.message);
+      } else {
+        console.error('Unknown error:', error);
+      }
+      throw error; // Rethrow the error after logging it
+    }
+  },
+
+  getHistory: async (userId: string): Promise<Movie[]> => {
+    const response = await axiosInstance.get(`/users/${userId}/history`);
+    const data = response.data;
+    return data.map((item: any) => ({
+      id: item.movie.id,
+      title: item.movie.title,
+      poster_url: item.movie.poster_url,
+    }));
+  }
 };
 
 export default MovieService;
