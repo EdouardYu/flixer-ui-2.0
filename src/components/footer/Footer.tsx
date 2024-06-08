@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 <img src={bousoleImage} alt="Icon" className="footer-icon" />
                 <h3>Navigation</h3>
                 <ul>
-                    <li><a href="#">My profile</a></li>
+                    <li><a href="/profile">My profile</a></li>
                     <li><a href="#">Our offers</a></li>
                     <li><a href="#">Catalogue</a></li>
                 </ul>

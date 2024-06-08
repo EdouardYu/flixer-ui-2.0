@@ -13,7 +13,7 @@ const ChartePage: React.FC<ChartePageProps> = () => {
                     <li id="introduction">
                         <h2>Introduction</h2>
                         <p>
-                            Chez <strong>Entreprise Fictive</strong>, nous nous engageons à protéger vos données personnelles.
+                            Chez <strong>FLIXER</strong>, nous nous engageons à protéger vos données personnelles.
                             Cette charte explique comment nous collectons, utilisons et protégeons vos informations personnelles.
                         </p>
                     </li>

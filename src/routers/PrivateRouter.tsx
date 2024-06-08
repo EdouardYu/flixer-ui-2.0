@@ -8,12 +8,13 @@ import {
   MovieTrailer,
   PageNotFound,
   SupplierPage,
-  MovieHistory
+  MovieHistory,
 } from "@/pages";
 import { MovieGuard, InverseMovieGuard } from "@/guards/MovieGuard";
 import { SupplierGuard } from "@/guards/SupplierGuard";
 import SearchResults from "@/pages/search-by-name/SearchResults";
 import TagsResults from "@/pages/search-by-tags/TagsResults";
+import CharteDonnées from "@/pages/charte-données/CharteDonnéesPerso";
 
 
 const PrivateRouter: FunctionComponent = () => {
@@ -50,7 +51,9 @@ const PrivateRouter: FunctionComponent = () => {
             </SupplierGuard>
           }
         />
+        
         <Route path="*" element={<PageNotFound />} />
+        <Route path="/charteDonnées" element={<CharteDonnées />} />
       </Route>
     </Routes>
   );
