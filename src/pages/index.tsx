@@ -11,3 +11,6 @@ export { default as Footer } from "@/components/footer/Footer";
 export { default as MovieTrailer } from "@/pages/movie-trailer/MovieTrailer";
 export { default as SupplierPage } from "@/pages/supplier/Supplier";
 export { default as MovieHistory } from "@/pages/movie-history/MovieHistory";
+export { default as FAQS } from "@/pages/FAQS/FAQS";
+export { default as CharteDonnées } from "@/pages/charte-données/CharteDonnéesPerso";
+export { default as AboutUs } from "@/pages/about-us/AboutUs";

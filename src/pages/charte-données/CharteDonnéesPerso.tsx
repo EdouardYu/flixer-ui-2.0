@@ -1,6 +1,5 @@
 import React from 'react';
 import './CharteDonnéesPerso.css';
-import logoImage from './../assets/flixer_logo.jpg';
 
 interface ChartePageProps {}
 
@@ -8,59 +7,59 @@ const ChartePage: React.FC<ChartePageProps> = () => {
     return (
         <div className="charte-container">
             <main className="charte-main">
-                <h1>Charte pour la Protection des Données Personnelles</h1>
+                <h1>Personal Data Protection Charter</h1>
                 <ul className="charte-list">
                     <li id="introduction">
                         <h2>Introduction</h2>
                         <p>
-                            Chez <strong>FLIXER</strong>, nous nous engageons à protéger vos données personnelles.
-                            Cette charte explique comment nous collectons, utilisons et protégeons vos informations personnelles.
+                            At <strong>FLIXER</strong>, we are committed to protecting your personal data.
+                            This charter explains how we collect, use, and protect your personal information.
                         </p>
                     </li>
-                    <li id="collecte-donnees">
-                        <h2>Collecte des Données</h2>
+                    <li id="data-collection">
+                        <h2>Data Collection</h2>
                         <ul className="inner-list">
-                            <li>Informations fournies par l'utilisateur: nom, adresse e-mail, numéro de téléphone.</li>
-                            <li>Informations collectées automatiquement: adresse IP, type de navigateur, pages visitées.</li>
-                            <li>Informations provenant de tiers: réseaux sociaux, partenaires commerciaux.</li>
+                            <li>Information provided by the user: name, email address, phone number.</li>
+                            <li>Information collected automatically: IP address, browser type, pages visited.</li>
+                            <li>Information from third parties: social networks, business partners.</li>
                         </ul>
                     </li>
-                    <li id="utilisation-donnees">
-                        <h2>Utilisation des Données</h2>
+                    <li id="data-usage">
+                        <h2>Data Usage</h2>
                         <ul className="inner-list">
-                            <li>Fournir nos services et améliorer l'expérience utilisateur.</li>
-                            <li>Personnaliser le contenu et les offres promotionnelles.</li>
-                            <li>Répondre aux demandes des utilisateurs et assurer le support client.</li>
-                            <li>Respecter les obligations légales.</li>
+                            <li>Provide our services and improve user experience.</li>
+                            <li>Personalize content and promotional offers.</li>
+                            <li>Respond to user requests and provide customer support.</li>
+                            <li>Comply with legal obligations.</li>
                         </ul>
                     </li>
-                    <li id="droits-utilisateurs">
-                        <h2>Droits des Utilisateurs</h2>
-                        <p>Les utilisateurs disposent des droits suivants concernant leurs données personnelles:</p>
+                    <li id="user-rights">
+                        <h2>User Rights</h2>
+                        <p>Users have the following rights regarding their personal data:</p>
                         <ul className="inner-list">
-                            <li>Droit d'accès: obtenir une copie de vos données personnelles.</li>
-                            <li>Droit de rectification: corriger toute information inexacte.</li>
-                            <li>Droit de suppression: demander la suppression de vos données.</li>
-                            <li>Droit d'opposition: s'opposer au traitement de vos données pour des motifs légitimes.</li>
-                            <li>Droit à la portabilité: transférer vos données vers un autre prestataire.</li>
+                            <li>Right of access: obtain a copy of your personal data.</li>
+                            <li>Right to rectification: correct any inaccurate information.</li>
+                            <li>Right to erasure: request the deletion of your data.</li>
+                            <li>Right to object: object to the processing of your data on legitimate grounds.</li>
+                            <li>Right to data portability: transfer your data to another provider.</li>
                         </ul>
                         <p>
-                            Pour exercer ces droits, veuillez nous contacter à l'adresse e-mail:
+                            To exercise these rights, please contact us at the email address:
                             <a href="mailto:protection-donnees@flixer.fr">protection-donnees@flixer.fr</a>.
                         </p>
                     </li>
                     <li id="contact">
                         <h2>Contact</h2>
                         <p>
-                            Si vous avez des questions concernant cette charte ou le traitement de vos données personnelles,
-                            veuillez nous contacter à l'adresse suivante:
+                            If you have any questions regarding this charter or the processing of your personal data,
+                            please contact us at the following address:
                         </p>
                         <address>
                             <strong>FLIXER</strong><br/>
                             28 Rue Notre Dame des Champs<br/>
                             75006 Paris, France<br/>
                             <a href="mailto:contact@flixer.fr">contact@flixer.fr</a><br/>
-                            Tél: +33 1 00 00 00 00
+                            Tel: +33 1 00 00 00 00
                         </address>
                     </li>
                 </ul>

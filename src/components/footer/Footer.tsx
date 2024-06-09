@@ -15,8 +15,8 @@ const Footer: React.FC = () => {
                 <h3>You and us</h3>
                 <ul>
                     <li><a href="#">Contact us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Who are we ?</a></li>
+                    <li><a href="/FAQS">FAQ</a></li>
+                    <li><a href="/about-us">Who are we ?</a></li>
                 </ul>
             </div>
             <div className="footer-section">
