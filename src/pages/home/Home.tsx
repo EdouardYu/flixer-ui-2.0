@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import MovieRow from "@/components/movie-row/MovieRow";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
@@ -19,8 +19,12 @@ const Homepage: React.FC = () => {
     setIsLoading(true);
     try {
       const allMoviesData = await MovieService.fetchMovies(pageNumber);
-      const discoverMoviesData = await MovieService.fetchDiscoverMovies(pageNumber);
-      const topRatedMoviesData = await MovieService.fetchTopRatedMovies(pageNumber);
+      const discoverMoviesData = await MovieService.fetchDiscoverMovies(
+        pageNumber
+      );
+      const topRatedMoviesData = await MovieService.fetchTopRatedMovies(
+        pageNumber
+      );
 
       setAllMovies((prevMovies) => {
         const newMovies = allMoviesData.content.filter(
@@ -45,8 +49,8 @@ const Homepage: React.FC = () => {
 
       setHasMore(
         allMoviesData.totalPages > pageNumber + 1 ||
-        discoverMoviesData.totalPages > pageNumber + 1 ||
-        topRatedMoviesData.totalPages > pageNumber + 1
+          discoverMoviesData.totalPages > pageNumber + 1 ||
+          topRatedMoviesData.totalPages > pageNumber + 1
       );
       setIsLoading(false);
     } catch (err) {
@@ -86,7 +90,7 @@ const Homepage: React.FC = () => {
       setAllMovies([]);
       setDiscoverMovies([]);
       setTopRatedMovies([]);
-      setPage(0); 
+      setPage(0);
       loadMovies(0);
     }
   }, [location.search]);

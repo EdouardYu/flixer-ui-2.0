@@ -1,10 +1,9 @@
 import axiosInstance from "@/services/axiosConfig";
 import axios from "axios";
 
-
 interface PurchaseData {
-  user_id: string;
-  movie_id: string;
+  user_id: string | undefined;
+  movie_id: string | undefined;
 }
 
 export interface Movie {
@@ -35,15 +34,13 @@ interface HistoryData {
   movie_id: number;
 }
 
-
 interface PaginatedMovies {
   content: Movie[];
   totalPages: number;
 }
 
-
 const MovieService = {
-  purchaseMovie: async (purchaseData: PurchaseData) => {
+  purchaseMovie: async (purchaseData: PurchaseData | undefined) => {
     await axiosInstance.post(`/movies/purchase`, purchaseData);
   },
 
@@ -55,7 +52,7 @@ const MovieService = {
     return response.data;
   },
 
-  getMovieDetails: async (movie_id: string) => {
+  getMovieDetails: async (movie_id: string | undefined) => {
     const response = await axiosInstance.get(`/movies/${movie_id}`);
     return response.data;
   },
@@ -74,22 +71,31 @@ const MovieService = {
   //     .slice(0, 50);
   // },
 
-  fetchMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
+  fetchMovies: async (
+    page: number = 0,
+    size: number = 20
+  ): Promise<PaginatedMovies> => {
     const response = await axiosInstance.get("/movies", {
       params: { page, size },
     });
-    console.log(response.data); 
+    console.log(response.data);
     return response.data;
   },
 
-  fetchTopRatedMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
+  fetchTopRatedMovies: async (
+    page: number = 0,
+    size: number = 20
+  ): Promise<PaginatedMovies> => {
     const response = await axiosInstance.get("/movies/getTopRatedMovies", {
       params: { page, size },
     });
     return response.data;
   },
 
-  fetchDiscoverMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
+  fetchDiscoverMovies: async (
+    page: number = 0,
+    size: number = 20
+  ): Promise<PaginatedMovies> => {
     const response = await axiosInstance.get("/movies/discover", {
       params: { page, size },
     });
@@ -138,13 +144,16 @@ const MovieService = {
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.error('Axios error:', error.response ? error.response.data : error.message);
+        console.error(
+          "Axios error:",
+          error.response ? error.response.data : error.message
+        );
       } else if (error instanceof Error) {
-        console.error('General error:', error.message);
+        console.error("General error:", error.message);
       } else {
-        console.error('Unknown error:', error);
+        console.error("Unknown error:", error);
       }
-      throw error; 
+      throw error;
     }
   },
 
@@ -156,7 +165,7 @@ const MovieService = {
       title: item.movie.title,
       poster_url: item.movie.poster_url,
     }));
-  }
+  },
 };
 
 export default MovieService;
