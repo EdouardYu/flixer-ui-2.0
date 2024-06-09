@@ -34,6 +34,14 @@ interface HistoryData {
   user_id: number;
   movie_id: number;
 }
+
+
+interface PaginatedMovies {
+  content: Movie[];
+  totalPages: number;
+}
+
+
 const MovieService = {
   purchaseMovie: async (purchaseData: PurchaseData) => {
     await axiosInstance.post(`/movies/purchase`, purchaseData);
@@ -52,18 +60,40 @@ const MovieService = {
     return response.data;
   },
 
-  fetchMovies: async (page: number): Promise<Movie[]> => {
+  // fetchMovies: async (page: number): Promise<Movie[]> => {
+  //   const response = await axiosInstance.get("/movies", {
+  //     params: { page, size: 50 },
+  //   });
+  //   const data = response.data.content;
+  //   return data
+  //     .map((movie: any) => ({
+  //       id: movie.id,
+  //       title: movie.title,
+  //       poster_url: movie.poster_url,
+  //     }))
+  //     .slice(0, 50);
+  // },
+
+  fetchMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
     const response = await axiosInstance.get("/movies", {
-      params: { page, size: 50 },
+      params: { page, size },
     });
-    const data = response.data.content;
-    return data
-      .map((movie: any) => ({
-        id: movie.id,
-        title: movie.title,
-        poster_url: movie.poster_url,
-      }))
-      .slice(0, 50);
+    console.log(response.data); 
+    return response.data;
+  },
+
+  fetchTopRatedMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
+    const response = await axiosInstance.get("/movies/getTopRatedMovies", {
+      params: { page, size },
+    });
+    return response.data;
+  },
+
+  fetchDiscoverMovies: async (page: number = 0, size: number = 20): Promise<PaginatedMovies> => {
+    const response = await axiosInstance.get("/movies/discover", {
+      params: { page, size },
+    });
+    return response.data;
   },
 
   fetchMoviesByName: async (
@@ -114,7 +144,7 @@ const MovieService = {
       } else {
         console.error('Unknown error:', error);
       }
-      throw error; // Rethrow the error after logging it
+      throw error; 
     }
   },
 

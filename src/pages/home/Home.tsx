@@ -1,35 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import MovieRow from "@/components/movie-row/MovieRow";
 import "./Home.css";
 import { useLocation } from "react-router-dom";
-import MovieService, { Movie, Category } from "@/services/MovieService";
+import MovieService, { Movie } from "@/services/MovieService";
 import Loader from "@/components/loader/Loader";
 
 const Homepage: React.FC = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [allMovies, setAllMovies] = useState<Movie[]>([]);
+  const [discoverMovies, setDiscoverMovies] = useState<Movie[]>([]);
+  const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const location = useLocation();
 
+  const loadMovies = async (pageNumber: number) => {
+    setIsLoading(true);
+    try {
+      const allMoviesData = await MovieService.fetchMovies(pageNumber);
+      const discoverMoviesData = await MovieService.fetchDiscoverMovies(pageNumber);
+      const topRatedMoviesData = await MovieService.fetchTopRatedMovies(pageNumber);
+
+      setAllMovies((prevMovies) => {
+        const newMovies = allMoviesData.content.filter(
+          (movie) => !prevMovies.some((m) => m.id === movie.id)
+        );
+        return [...prevMovies, ...newMovies];
+      });
+
+      setDiscoverMovies((prevMovies) => {
+        const newMovies = discoverMoviesData.content.filter(
+          (movie) => !prevMovies.some((m) => m.id === movie.id)
+        );
+        return [...prevMovies, ...newMovies];
+      });
+
+      setTopRatedMovies((prevMovies) => {
+        const newMovies = topRatedMoviesData.content.filter(
+          (movie) => !prevMovies.some((m) => m.id === movie.id)
+        );
+        return [...prevMovies, ...newMovies];
+      });
+
+      setHasMore(
+        allMoviesData.totalPages > pageNumber + 1 ||
+        discoverMoviesData.totalPages > pageNumber + 1 ||
+        topRatedMoviesData.totalPages > pageNumber + 1
+      );
+      setIsLoading(false);
+    } catch (err) {
+      console.error("Failed to fetch movies:", err);
+      setError("Failed to load movies");
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        const allMovies = await MovieService.fetchMovies(2);
-        setCategories([
-          { title: 'All Movies', movies: allMovies.slice(0,20) },
-          { title: 'Discover', movies: allMovies.slice(21, 35) }, 
-          { title: 'Monthly Rank', movies: allMovies.slice(36, 50) } 
-      ]);
-        setIsLoading(false);
-      } catch (err) {
-        console.error("Failed to fetch movies:", err);
-        setError("Failed to load movies");
-        setIsLoading(false);
-      }
-    };
-    loadMovies();
-  }, []);
+    loadMovies(page);
+  }, [page]);
+
+  const loadMoreMovies = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -37,30 +70,51 @@ const Homepage: React.FC = () => {
 
     if (query) {
       const lowerCaseQuery = query.toLowerCase();
-      const results = categories
-        .flatMap((category) => category.movies)
-        .filter((movie) => movie.title.toLowerCase().includes(lowerCaseQuery));
-      setSearchResults(results);
+      const filteredAllMovies = allMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(lowerCaseQuery)
+      );
+      const filteredDiscoverMovies = discoverMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(lowerCaseQuery)
+      );
+      const filteredTopRatedMovies = topRatedMovies.filter((movie) =>
+        movie.title.toLowerCase().includes(lowerCaseQuery)
+      );
+      setAllMovies(filteredAllMovies);
+      setDiscoverMovies(filteredDiscoverMovies);
+      setTopRatedMovies(filteredTopRatedMovies);
     } else {
-      setSearchResults([]);
+      setAllMovies([]);
+      setDiscoverMovies([]);
+      setTopRatedMovies([]);
+      setPage(0); 
+      loadMovies(0);
     }
-  }, [location.search, categories]);
+  }, [location.search]);
 
-  if (isLoading) return <Loader />;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="homepage">
-      {searchResults.length > 0 ? (
-        <MovieRow title="Search Results" movies={searchResults} />
+      {allMovies.length > 0 ? (
+        <MovieRow title="All Movies" movies={allMovies} />
       ) : (
-        categories.map((category) => (
-          <MovieRow
-            key={category.title}
-            title={category.title}
-            movies={category.movies}
-          />
-        ))
+        <Loader />
+      )}
+      {discoverMovies.length > 0 ? (
+        <MovieRow title="Discover" movies={discoverMovies} />
+      ) : (
+        <Loader />
+      )}
+      {topRatedMovies.length > 0 ? (
+        <MovieRow title="Top Rated" movies={topRatedMovies} />
+      ) : (
+        <Loader />
+      )}
+      {isLoading && <Loader />}
+      {hasMore && !isLoading && (
+        <button onClick={loadMoreMovies} className="load-more-button">
+          Load More
+        </button>
       )}
     </div>
   );

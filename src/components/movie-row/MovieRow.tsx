@@ -1,14 +1,9 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import MovieService from '@/services/MovieService';
-import './MovieRow.css';
-import axios from 'axios';
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_url: string;
-}
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import MovieService from "@/services/MovieService";
+import { Movie } from "@/services/MovieService";
+import "./MovieRow.css";
+import axios from "axios";
 
 interface MovieRowProps {
   title: string;
@@ -42,7 +37,7 @@ const MovieRow: React.FC<MovieRowProps> = ({ title, movies }) => {
   const handleClick = async (movieId: number) => {
     const userDetails = getUserDetails();
     if (userDetails) {
-      const userId = Number(userDetails.id); 
+      const userId = Number(userDetails.id);
       if (!userId) {
         console.error("User ID is null or invalid.");
         return;
@@ -72,8 +67,12 @@ const MovieRow: React.FC<MovieRowProps> = ({ title, movies }) => {
     <div className="movie-row">
       <h2>{title}</h2>
       <div className="row-scroll">
-        {movies.map(movie => (
-          <div className="movie-card" key={movie.id} onClick={() => handleClick(movie.id)}>
+        {movies.map((movie) => (
+          <div
+            className="movie-card"
+            key={movie.id}
+            onClick={() => handleClick(movie.id)}
+          >
             <img src={movie.poster_url} alt={movie.title} />
             <div>{movie.title}</div>
           </div>
